@@ -8,35 +8,9 @@ void DFS(vector<vector<int>> &G, vector<bool> &visited, int s){ // For DFS trave
         if (visited[i] == false)
             DFS(G, visited, i);
 }
-
-
-int main(){
-    int n,m; //n -> nodes, m -> edges
-    cin>>n>>m;
-    vector<vector<int>>G(n);
-    for(int i=0; i<m; i++){
-        int u,v;
-        cin>>u>>v;    //for 0 based nodes, for 1 based nodes either make G of size n+1 or do u--, v--
-        G[u].push_back(v);
-        G[v].push_back(u);
-    }
-    //Printing the adjacency list
-
-    // for(int i=0; i<n; i++){
-    //     cout << i << " : ";
-    //     for(int j=0; j<G[i].size(); j++){
-    //         cout << G[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-    vector<bool> visited(G.size(), false);
-    // cout<<"DFS Traversal is: ";
-    // int s = 0; // starting from source = 0
-    // DFS(G, visited, s);
-
+void BFS(vector<vector<int>> &G, vector<bool> &visited, int s){ // For BFS traversal
     queue<int> q;
     cout<<"BFS Traversal is: ";
-    int s=0; // starting from source = 0
     q.push(s);
     visited[s] = true;
     while(!q.empty()){
@@ -51,3 +25,36 @@ int main(){
         }
     }
 }
+
+int main(){
+    int n,m; //n -> nodes, m -> edges
+    cin>>n>>m;
+    vector<vector<int>>G(n);
+    for(int i=0; i<m; i++){
+        int u,v;
+        cin>>u>>v;    //for 0 based nodes, for 1 based nodes either make G of size n+1 or do u--, v--
+        G[u].push_back(v);
+        G[v].push_back(u);
+    }
+
+    int choice, s;
+    cout << "Enter 1 for DFS, 2 for BFS: ";
+    cin >> choice;
+    cout << "Enter starting node: ";
+    cin >> s;
+    
+    vector<bool> visited(n, false);
+    
+    if (choice == 1) {
+        cout << "DFS Traversal: ";
+        DFS(G, visited, s);
+    } else if (choice == 2) {
+        cout << "BFS Traversal: ";
+        BFS(G, visited, s);
+    } else {
+        cout << "Invalid choice!";
+    }
+    
+    return 0;
+}
+

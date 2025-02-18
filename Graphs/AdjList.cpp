@@ -6,17 +6,17 @@ using namespace std;
 int main() {
     int m;
     cin>>m;
-    vector<pair<int, int>>adjList(m+1);
+    vector<int>adjList[m+1];
     for(int i=0; i<m; i++){
-            int u, v, w;
-            cin>>u>>v>>w;
-            adjList[u].push_back{v,w};
-            adjList[v].push_back{u,w};
+            int u, v;
+            cin>>u>>v;
+            adjList[u].push_back(v);
+            adjList[v].push_back(u);
     }
-    for(int i=0; i<=m; i++){
+    for(int i=0; i<m; i++){
         cout<<i<<":";
         for(int j=0; j<adjList[i].size(); j++){
-            cout<<adjList[i][j].first<<" "<<adjList[i][j].second<<" ";
+            cout<<adjList[i][j]<<" ";
         }
         cout<<endl;
     }
